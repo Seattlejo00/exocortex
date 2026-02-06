@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Exocortex — Your entire digital self. One place.",
     description:
       "Every AI knows a piece of you. Exocortex knows all of you. Unify your digital identity across every platform.",
-    url: "https://exocortex.ai",
+    url: "https://exocortex.distomostech.com",
     siteName: "Exocortex",
     type: "website",
     locale: "en_US",
