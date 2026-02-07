@@ -1,20 +1,43 @@
 import { neon } from "@neondatabase/serverless";
 
 const DB_URL_ENV_KEYS = [
-  "POSTGRES_URL",
   "exocortex_POSTGRES_URL",
-  "DATABASE_URL",
   "exocortex_DATABASE_URL",
+  "POSTGRES_URL",
+  "DATABASE_URL",
 ] as const;
 
 function getDatabaseUrl(): string {
+  const problems: string[] = [];
+
   for (const key of DB_URL_ENV_KEYS) {
-    const value = process.env[key];
-    if (value) return value;
+    const rawValue = process.env[key];
+    if (!rawValue) continue;
+
+    const value = rawValue.trim();
+    if (!value) continue;
+
+    let parsed: URL;
+    try {
+      parsed = new URL(value);
+    } catch {
+      problems.push(`${key}=invalid-url`);
+      continue;
+    }
+
+    // Skip common placeholder values copied from sample env files.
+    if (!parsed.hostname || parsed.hostname.toLowerCase() === "host") {
+      problems.push(`${key}=placeholder-host`);
+      continue;
+    }
+
+    return value;
   }
 
   throw new Error(
-    `Missing database URL. Set one of: ${DB_URL_ENV_KEYS.join(", ")}. In Vercel, attach your Neon Postgres database to this project and redeploy.`
+    `Missing valid database URL. Checked keys: ${DB_URL_ENV_KEYS.join(", ")}.` +
+      ` Problems: ${problems.join(", ") || "none"}.` +
+      ` In Vercel, ensure a real Neon connection string is set and remove placeholders like '@host'.`
   );
 }
 

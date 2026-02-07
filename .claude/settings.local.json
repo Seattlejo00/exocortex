@@ -5,7 +5,8 @@
       "Bash(dir /a \"C:\\\\SPB_Data\\\\exocortex\")",
       "Bash(npm install:*)",
       "Bash(npx next build)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(node -e:*)"
     ]
   }
 }

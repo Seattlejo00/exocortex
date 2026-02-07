@@ -34,12 +34,21 @@ export const metadata: Metadata = {
     siteName: "Exocortex",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "https://exocortex.distomostech.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Exocortex — Your entire digital self. One place.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Exocortex — Your entire digital self. One place.",
     description:
       "Every AI knows a piece of you. Exocortex knows all of you. Unify your digital identity across every platform.",
+    images: ["https://exocortex.distomostech.com/og-image.png"],
   },
   robots: {
     index: true,
